@@ -1,0 +1,236 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 27 21:35:04 2022
+
+@author: HP
+"""
+import numpy as np
+
+#créer un tableau à une dimension
+vecteur = np.array([0,1,2,3])
+print(f'vecteur = {vecteur}')
+
+#créer un tableau à plusieurs dimensions
+vecteur_2d = np.array([[0,1,2],[3,5,6]])
+print(f'vecteur_2d= {vecteur_2d}')
+vecteur_3d = np.array([[[0,1,2,3],[4,5,6,7],[8,9,10,11]],[[0,1,2,3],[4,5,6,7],[8,9,10,11]]])
+print(f'vecteur_3d= {vecteur_3d}')
+
+#dimensions d'un tableau
+print(f'Le nombre de dimensions de vecteur est {vecteur.ndim}.')
+print(f'Les dimensions de vecteur est {vecteur.shape}.')
+print(f'Le nombre de dimensions de vecteur_3d est {vecteur_3d.ndim}.')
+print(f'Les dimensions de vecteur_3d est {vecteur_3d.shape}.')
+print(f'vecteur_3d= {vecteur_3d}')
+print(f'Le tableau vecteur_3d contient {vecteur_3d.shape[0]} matrices.') 
+print(f'Chacune de ses matrices est définie par {vecteur_3d.shape[1]} lignes.')
+print(f'Chacune des lignes des deux matrices est définie par {vecteur_3d.shape[2]} colonnes.')
+
+#type et taille d'un tableau 
+vect_1 = np.array([1, 2, 3],dtype='int16')
+vect_2 = np.array([[1, 2, 3],[1, 2, 3]],dtype='int32')
+vect_3 = np.array([1, 2, 3],dtype='float')
+print(f"Le type de vect_1 est : {type(vect_1)}.")
+print(f"Le type de vect_2 est : {type(vect_2)}.")
+print(f"Le type de vect_3 est : {type(vect_3)}.")
+
+print(f"Le type des éléments de vect_1 est : {vect_1.dtype}.")
+print(f"Le type des éléments de vect_2 est : {vect_2.dtype}.")
+print(f"Le type des éléments de vect_3 est : {vect_3.dtype}.")
+
+print(f"Le nombre d'éléments dans vect_1 : {vect_1.size}.")
+print(f"Le nombre d'éléments dans vect_2 : {vect_2.size}.")
+print(f"Le nombre d'éléments dans vect_3 : {vect_3.size}.")
+
+
+#Fonction d'initialisation de tableau
+vect_1 = np.zeros(10)
+vect_2 = np.zeros(10, dtype='int32')
+vect_3 = np.ones((3,4),dtype='int16')
+vect_4 = np.full((3,4),5)
+vect_5 = np.full_like(vect_4, 10)
+vect_6 = np.identity(3)
+vect_7 = np.random.randn(3,4)
+vect_8 = np.linspace(0, 10, 20)
+vect_9 = np.arange(0,10,0.5)
+vect_list = [vect_1, vect_2, vect_3, vect_4, vect_5, vect_6, vect_7, vect_8, vect_9]
+i = 1
+for vect in vect_list:
+    print(f"vect_{i} = \n{vect}")
+    i+=1
+
+#accéder aux données d'un tableau à une dimension
+liste = [i**2 for i in range(10)]
+vect = np.array(liste)
+print(f"vect = {vect}")
+print(f"vect[1] = {vect[1]}")
+print(f"vect[[1,5]] = {vect[[1,5]]}")
+print(f"vect[[0,-1]] = {vect[[0,-1]]}")
+print(f"vect[2:6] = {vect[2:6]}")
+print(f"vect[2:] = {vect[2:]}")
+print(f"vect[0:10:2] = {vect[0:10:2]}")
+
+#accéder aux données d'un tableau à deux dimensions
+vect = np.array([[1, 2, 3],
+                 [4, 5, 6], 
+                 [7, 8, 9],
+                 [10, 11, 12], 
+                 [13, 14, 15]])
+print(f"vect = \n{vect}")
+print(f"vect[0,0] = {vect[0,0]}")
+print(f"vect[1,2] = {vect[1,2]}")
+print(f"vect[3,2] = {vect[3,2]}")
+print(f"vect[:,:] = \n{vect[:,:]}")
+print(f"vect[1,:] = {vect[1,:]}")
+print(f"vect[:,1] = {vect[:,1]}")
+print(f"vect[0:5:2,1] = {vect[0:5:2,1]}")
+
+#accéder aux données d'un tableau à deux dimensions
+vect = np.array([[[1, 2, 3],[4, 5, 6]],
+                 [[7, 8, 9],[10, 11, 12]]])
+print(f"vect = \n{vect}")
+print(f"vect[0] = \n{vect[0]}")
+print(f"vect[0,1] = {vect[0,1]}")
+print(f"vect[0,1,2] = {vect[0,1,2]}")
+print(f"vect[:,:,2] = \n{vect[:,:,2]}")
+print(f"vect[0,:,1] = {vect[0,:,1]}")
+print(f"vect[0,1,:] = {vect[0,1,:]}")
+
+#modifier les données d'un tableau numpy
+vect = np.array([[1, 2, 3],
+                 [4, 5, 6], 
+                 [7, 8, 9],])
+vect[1,1] = 55
+print(f"Après vect[1,1] = 55, le tableau devient \n{vect}.\n")
+vect[0,:] = 11
+print(f"Après vect[0,:] = 11, le tableau devient \n{vect}.\n")
+vect[:,2] = -33
+print(f"Après vect[:,2] = -33, le tableau devient \n{vect}.\n")
+
+#copier un tableau dans un autre tableau 
+vect_1 = np.array([1, 2, 3])
+vect_2 = vect_1
+vect_2[2] = 8
+print(f"vect_1 = {vect_1}")
+print(f"vect_2 = {vect_2}")
+vect_3 = vect_1.copy()
+vect_3[1] = -6
+print(f"vect_1 = {vect_1}")
+print(f"vect_3 = {vect_3}")
+
+#Algèbre linéaire avec Numpy
+
+#Opérations mathématiques de base
+vect_1 = np.array([1, 2, 3])
+print(f"vect_1 = {vect_1}")
+print(f"vect_1 + 2 = {vect_1+2}")
+print(f"vect_1 - 1 = {vect_1-1}")
+print(f"vect_1 * 3 = {vect_1*3}")
+print(f"vect_1 / 2 = {vect_1/2}")
+print(f"vect_1 ** 2 = {vect_1**2}")
+print(f"Cosinus(vect_1) = {np.cos(vect_1)}")
+print(f"Exp(vect_1) = {np.exp(vect_1)}")
+print(f"CosinusHyper(vect_1) = {np.cosh(vect_1)}")
+vect_2 = vect_1 + 3
+print(f"vect_2 = {vect_2}")
+print(f"vect_1 + vect_2 = {vect_1+vect_2}")
+print(f"vect_1 * vect_2 = {vect_1*vect_2}")
+
+
+#Opérations sur les matrices 
+mat_1 = np.random.randint(-10,10, size=(3,4))
+mat_2 = np.random.randint(-10,10, size=(4,2))
+mat_3 = np.matmul(mat_1,mat_2)
+print(f"mat_1 = \n{mat_1}")
+print(f"mat_2 = \n{mat_2}")
+print(f"mat_3 = \n{mat_3}")
+
+#Restructurer un tableau
+mat_0 = np.array([0, 1, 2, 3, 4, 5, 7 ,8])
+print(f"mat_0 = {mat_0}")
+mat_1 = mat_0.reshape(mat_0.shape[0],1)
+print(f"mat_1 = \n{mat_1}")
+mat_2 = mat_1.reshape(2,4)
+print(f"mat_2 = \n{mat_2}")
+mat_3 = mat_1.reshape(4,2)
+print(f"mat_3 = \n{mat_3}")
+mat_4 = mat_2.reshape(2,2,2)
+print(f"mat_4 = \n{mat_4}")
+mat_5 = mat_4.ravel()
+print(f"mat_5 = \n{mat_5}")
+mat_6 = mat_1.reshape(2,3)
+
+
+#Superposer des tableaux 
+vect_1 = np.array([0, 1, 2])
+vect_2 = np.array([0, 1])
+vect_3 = np.hstack([vect_1, vect_2])
+print(f"vect_3 = {vect_3}")
+vect_4 = np.vstack([vect_1, vect_2])
+mat_1 = np.random.randint(-10,10, size=(3,4))
+mat_2 = np.random.randint(-10,10, size=(3,4))
+mat_3 = np.hstack([mat_1, mat_2])
+mat_4 = np.vstack([mat_1, mat_2])
+print(f"mat_1 = \n{mat_1}")
+print(f"mat_2 = \n{mat_2}")
+print(f"mat_3 = \n{mat_3}")
+print(f"mat_4 = \n{mat_4}")
+
+
+#Statistiques descripytives avec numpy
+mat_1 = np.random.randint(-10,10, size=(5,5))
+print(f"mat_1 = \n{mat_1}")
+min_value = np.min(mat_1)
+max_value = np.max(mat_1)
+somme = np.sum(mat_1)
+mean = np.mean(mat_1)
+std = np.std(mat_1)
+print(f"La valeur minimale de mat_1 est {min_value}.")
+print(f"La valeur maximale de mat_1 est {max_value}.")
+print(f"La somme des valeurs de mat_1 est {somme}.")
+print(f"La valeur moyenne de mat_1 est {mean}.")
+print(f"L'écart-type de mat_1 est {std}.")
+#somme = np.sum(mat_1,axis=0)
+#np.argmin(mat_1,axis=0)
+#np.argmax(mat_1,axis=1)
+#np.corrcoef(mat_1)
+#np.unique(mat_1,return_counts=True)
+
+
+#Masques booléens
+#créer et utiliser un masque booléen
+mat = np.random.randint(0,100, size=(5,5))
+print(f"mat = \n{mat}")
+bool_matsup50 = mat > 50
+print(f"Les indices booléens pour les vavleurs > 50 de mat sont : = \n{bool_matsup50}")
+mat_sup50 = mat[bool_matsup50]
+print(f"Les valeurs de mat > 50 sont : = \n{mat_sup50}")
+
+bool_mat20_70 = (mat <50) & (mat > 20)
+print(f"Les indices booléens pour les vavleurs entre 20 et 50 de mat sont : = \n{bool_mat20_70}")
+mat20_70 = mat[bool_mat20_70]
+print(f"Les valeurs de mat entre 20 et 50 sont : = \n{mat20_70}")
+
+#Compraison List v Numpy
+#Tailles en mémoire
+import  sys
+py_list = list(range(100000))
+numpy_list = np.array(py_list)
+print(f"La taille en mémoire de py_list est {sys.getsizeof(py_list)}.")
+print(f"La taille en mémoire de numpy_list est {sys.getsizeof(numpy_list)}.")
+
+#Temps de calcul
+import time
+max_value = 30000
+py_list = list(range(max_value))
+numpy_list = np.array(np.arange(max_value))
+start_time = time.time()
+sum_py_list = sum(py_list)
+end_time = time.time()
+print(f"La somme des élements de py_list est {sum_py_list}.")
+print(f"Temps d'exécution : {end_time - start_time}.")
+start_time = time.time()
+sum_numpy_list = np.sum(numpy_list)
+end_time = time.time()
+print(f"La somme des élements de numpy_list est {sum_numpy_list}.")
+print(f"Temps d'exécution : {end_time - start_time}.")
